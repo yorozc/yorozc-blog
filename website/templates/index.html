@@ -4,6 +4,7 @@
 
 {% block content %}
     {% for post in posts %}
+    
     <div class="blog-container">
         <div class="blog-meta-data text-muted">
             <p class="author"> {{ post.author }}</p>
@@ -14,6 +15,7 @@
             <p class="blog-content">{{ post.content }}</p>
         </div>
     </div>
+    
         
     {% endfor %}
 {% endblock content%}

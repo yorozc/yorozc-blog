@@ -1,5 +1,12 @@
+body{
+    background-color: #f0eeee;
+}
+
+.navbar-default{
+    background-color: rgb(40, 67, 107) !important;
+}
+
 .navbar{
-    background-color: peachpuff;
     padding-top: 12px;
     padding-bottom: 12px;
 }
@@ -12,3 +19,36 @@
     font-size: 18px;
 }
 
+/* -----Blog posts-----*/
+
+.blog-container{
+    border: 1px solid #898989;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.blog-meta-data{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid #898989;
+}
+
+.blog-meta-data .author{
+    color: rgb(0, 26, 255);
+    font-size: 16px;
+}
+
+.blog-meta-data .date_added{
+    font-size: 10px;
+}
+
+/*-----sidebar-----*/
+.content-section{
+    border: 1px solid #898989;
+    border-radius: 4px;
+    padding: 20px;
+    background-color: white;
+}

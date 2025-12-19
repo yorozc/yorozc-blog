@@ -1,3 +1,14 @@
 .navbar{
     background-color: peachpuff;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
+
+.navbar-brand{
+    font-size: 24px;
+}
+
+.navbar-nav > li > a{
+    font-size: 18px;
+}
+

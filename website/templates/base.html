@@ -1,5 +1,9 @@
 {% extends "bootstrap/base.html"%}
 
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
 
 {% block title %} Yblog {% endblock %}
 

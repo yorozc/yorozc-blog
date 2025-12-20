@@ -27,6 +27,8 @@ def create_app():
     @app.route("/about")
     def about():
         return render_template("about.html")
+    
+    # make a page to add a blog post
 
     return app
 

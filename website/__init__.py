@@ -37,11 +37,20 @@ def create_app():
     def add_blog():
         if request.method == "POST":
             author = request.form["author"]
-            print(author)
+            title = request.form["title"]
+            content = request.form["content"]
+            
+            post = {'author': author,
+                    'title': title, 
+                    'content': content,
+                    'date_posted': datetime.now().strftime("%m-%d-%Y %I:%M%p")}
+            
+            posts.append(post)
 
             return redirect(url_for('index'))
 
         elif request.method == "GET":
+
             return render_template("add_blog.html")
 
     return app

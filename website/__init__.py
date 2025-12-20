@@ -7,14 +7,13 @@ posts = [
         'author': 'Yahir Orozco',
         'title': 'Blog Post 1',
         'content': 'First blog post I have done on this site',
-        'date_posted': '12/18/2025',
-        'time_posted': 0
+        'date_posted': datetime.now().strftime("%m-%d-%Y %I:%M%p")
     },
     {
         'author': 'Yahir Orozco',
         'title': 'Blog Post 2',
         'content': 'Second blog post I have done on this site',
-        'date_posted': '12/19/2025'
+        'date_posted': datetime.now().strftime("%m-%d-%Y %I:%M%p")
     }
 ]
 
@@ -27,13 +26,17 @@ def create_app():
     @app.route("/")
     @app.route("/home")
     def index():
-        return render_template("index.html", posts=posts)
+        return render_template("index.html", posts=posts, cur_time = datetime.now())
     
     @app.route("/about")
     def about():
         return render_template("about.html")
     
     # make a page to add a blog post
+    @app.route("/add_blog")
+    def add():
+        
+        return render_template("add_blog.html")
 
     return app
 

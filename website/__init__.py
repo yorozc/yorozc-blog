@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from flask_moment import Moment
 from datetime import datetime
 
@@ -33,10 +33,16 @@ def create_app():
         return render_template("about.html")
     
     # make a page to add a blog post
-    @app.route("/add_blog")
-    def add():
-        
-        return render_template("add_blog.html")
+    @app.route("/add_blog", methods=['POST', 'GET'])
+    def add_blog():
+        if request.method == "POST":
+            author = request.form["author"]
+            print(author)
+
+            return redirect(url_for('index'))
+
+        elif request.method == "GET":
+            return render_template("add_blog.html")
 
     return app
 

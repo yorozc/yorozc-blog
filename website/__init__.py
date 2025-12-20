@@ -1,11 +1,14 @@
 from flask import Flask, render_template, url_for
+from flask_moment import Moment
+from datetime import datetime
 
 posts = [
     {
         'author': 'Yahir Orozco',
         'title': 'Blog Post 1',
         'content': 'First blog post I have done on this site',
-        'date_posted': '12/18/2025'
+        'date_posted': '12/18/2025',
+        'time_posted': 0
     },
     {
         'author': 'Yahir Orozco',
@@ -18,6 +21,8 @@ posts = [
 
 def create_app():
     app = Flask(__name__)
+    moment = Moment(app)
+    
 
     @app.route("/")
     @app.route("/home")

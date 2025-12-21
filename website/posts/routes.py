@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, render_template
 from datetime import datetime
-from test_posts import fake_posts #testing only
+from website.test_data.test_posts import fake_posts # testing
 
 posts = Blueprint('posts', __name__)
 
@@ -19,7 +19,7 @@ def add_blog():
         
         fake_posts.append(post)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
 
     elif request.method == "GET":
 

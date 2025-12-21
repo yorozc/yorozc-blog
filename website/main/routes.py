@@ -1,6 +1,6 @@
-from flask import render_template, request, redirect, url_for, Blueprint
+from flask import render_template, Blueprint
 from datetime import datetime
-from test_posts import fake_posts #testing only
+from website.test_data.test_posts import fake_posts # testing
 
 main = Blueprint('main', __name__)
 

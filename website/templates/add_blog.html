@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="POST" action=" {{url_for('add_blog')}} ">
+<form method="POST" action=" {{url_for('posts.add_blog')}} ">
     <div class="form-group">
         <label for="author">Author: </label>
         <input type="text" class="form-control" id="author" name="author">

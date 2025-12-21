@@ -3,7 +3,7 @@
 {% block title %}Yblog{% endblock %}
 
 {% block content %}
-    {% for post in posts %}
+    {% for post in posts | reverse %}
     
     <div class="blog-container">
         <div class="blog-meta-data text-muted">

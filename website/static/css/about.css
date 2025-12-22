@@ -1,3 +1,11 @@
+.about_me{
+    border: 1px solid #898989;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
 .about_me_img{
     float: left;
     margin-right: 10px;

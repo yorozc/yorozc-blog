@@ -1,5 +1,6 @@
 from flask import render_template, Blueprint
 from datetime import datetime
+import pytz
 from website.test_data.test_posts import fake_posts # testing
 
 main = Blueprint('main', __name__)
@@ -11,5 +12,7 @@ def index():
 
 @main.route("/about")
 def about():
-    return render_template("about.html")
+    my_tz = datetime.now(pytz.utc).astimezone(pytz.timezone('US/Pacific'))
+    cur_time = my_tz.strftime("%I:%M %p")
+    return render_template("about.html", cur_time=cur_time)
 

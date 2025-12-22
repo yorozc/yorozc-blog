@@ -1,0 +1,9 @@
+.about_me_img{
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.about_me p{
+    text-align: justify;
+}

@@ -18,12 +18,19 @@ try:
         return MongoClient(
             _uri(),
         )
+    
+    try:
+        get_client().admin.command('ping')
+        print("Pinged your deployment. You successfully connected to MongoDB!")
+    except Exception as e:
+        print(e)
 
     def get_db():
         return get_client()[os.getenv("DB")]
 
-    def get_users_collection():
-        return get_db()["COLLECTION"]
+    def get_collection():
+        return get_db()[os.getenv("COLLECTION")]
+    
 except Exception as e:
     print("Unable to make connection to DB")
 

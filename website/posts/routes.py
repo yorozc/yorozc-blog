@@ -1,6 +1,7 @@
 from flask import Blueprint, request, redirect, url_for, render_template
 from datetime import datetime
 from website.test_data.test_posts import fake_posts # testing
+from website import get_collection
 
 posts = Blueprint('posts', __name__)
 
@@ -15,9 +16,12 @@ def add_blog():
         post = {'author': author,
                 'title': title, 
                 'content': content,
-                'date_posted': datetime.now().strftime("%m-%d-%Y %I:%M%p")}
+                'date_posted': datetime.now().strftime("%m-%d-%Y %I:%M%p")
+                }
         
-        fake_posts.append(post)
+        coll = get_collection()
+
+        coll.insert_one(post)
 
         return redirect(url_for('main.index'))
 

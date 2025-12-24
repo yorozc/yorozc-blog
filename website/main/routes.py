@@ -10,8 +10,8 @@ main = Blueprint('main', __name__)
 @main.route("/home")
 def index():
     coll = get_collection()
-    print(coll.find())
-    return render_template("index.html", posts=fake_posts, cur_time = datetime.now())
+    
+    return render_template("index.html", posts=coll.find({}), cur_time = datetime.now())
 
 @main.route("/about")
 def about():

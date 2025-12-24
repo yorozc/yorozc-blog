@@ -28,3 +28,7 @@ def add_blog():
     elif request.method == "GET":
 
         return render_template("add_blog.html")
+    
+@posts.route("/delete_blog", methods=['POST'])
+def delete():
+    pass

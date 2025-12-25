@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_moment import Moment
 from flask_bcrypt import Bcrypt
+import os
 
 app = Flask(__name__)
 moment = Moment(app)
 bcrypt = Bcrypt(app)
+
+app.secret_key = os.getenv("SECRET_KEY")
 
 from website.main.routes import main
 from website.posts.routes import posts

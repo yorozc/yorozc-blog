@@ -27,7 +27,7 @@ try:
         return get_db()[os.getenv("BLOG_COLLECTION")]
     
     def get_users_collection():
-        return get_db()[os.getenv("USERS_COLLECTION")]
+        return get_db()[os.getenv("USER_COLLECTION")]
 
 except Exception as e:
     print("Unable to make connection to DB")

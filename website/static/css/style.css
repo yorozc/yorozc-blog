@@ -70,7 +70,10 @@ body{
 .flash_message{
     font-weight: bold;
     margin-bottom: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
 }
 
 .flash_message.success{
@@ -78,6 +81,6 @@ body{
 }
 
 .flash_message.error{
-    
+    background-color: rgb(245, 106, 106);
 }
 

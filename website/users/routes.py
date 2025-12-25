@@ -23,7 +23,9 @@ def register():
         email = request.form["email"]
         password = request.form["password"]
 
-        #TODO: check if user exists 
+        #TODO: check if user exists and stop duplicates
+
+        #TODO: check for same username and stop duplicates
 
         #TODO: validate email and password via regex
 
@@ -35,8 +37,9 @@ def register():
 
         user_coll = get_users_collection()
 
+        # success case (need login stuff)
         user_coll.insert_one(user)
-        flash(message="User added", category="success")
+        flash(message=f"User {username} added", category="success")
 
         return redirect(url_for("main.index"))
 

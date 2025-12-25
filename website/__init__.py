@@ -1,11 +1,13 @@
 from flask import Flask
 from flask_moment import Moment
+from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
 from pymongo.errors import ConfigurationError
 import os
 
 app = Flask(__name__)
 moment = Moment(app)
+bcrypt = Bcrypt(app)
 
 try:
     def _uri():

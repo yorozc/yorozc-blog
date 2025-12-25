@@ -3,6 +3,23 @@
 {% block title %}Yblog{% endblock %}
 
 {% block content %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == "success" %}
+                    <div class="flash_message success">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div class="flash_message error">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     {% for post in posts | reverse %}
     
     <div class="blog-container">

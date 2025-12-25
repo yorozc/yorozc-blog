@@ -53,3 +53,17 @@ body{
     background-color: white;
 }
 
+/*-----flash messages-----*/
+
+.flash_message{
+
+}
+
+.flash_message .success{
+    
+}
+
+.flash_message .error{
+    
+}
+

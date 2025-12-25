@@ -23,8 +23,11 @@ try:
     def get_db():
         return get_client()[os.getenv("DB")]
 
-    def get_collection():
-        return get_db()[os.getenv("COLLECTION")]
+    def get_blog_collection():
+        return get_db()[os.getenv("BLOG_COLLECTION")]
+    
+    def get_users_collection():
+        return get_db()[os.getenv("USERS_COLLECTION")]
 
 except Exception as e:
     print("Unable to make connection to DB")

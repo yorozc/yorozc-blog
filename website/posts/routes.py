@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, render_template
 from datetime import datetime
-from website.database.db import get_collection
+from website.database.db import get_blog_collection
 
 posts = Blueprint('posts', __name__)
 
@@ -18,7 +18,7 @@ def add_blog():
                 'date_posted': datetime.now().strftime("%m-%d-%Y %I:%M%p")
                 }
         
-        coll = get_collection()
+        coll = get_blog_collection()
 
         coll.insert_one(post)
 

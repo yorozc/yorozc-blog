@@ -2,14 +2,14 @@ from flask import render_template, Blueprint
 from datetime import datetime
 import pytz
 from website.test_data.test_posts import fake_posts # testing
-from website.database.db import get_collection
+from website.database.db import get_blog_collection
 
 main = Blueprint('main', __name__)
 
 @main.route("/")
 @main.route("/home")
 def index():
-    coll = get_collection()
+    coll = get_blog_collection()
     
     return render_template("index.html", posts=coll.find({}), cur_time = datetime.now())
 

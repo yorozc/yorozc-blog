@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_moment import Moment
 from flask_bcrypt import Bcrypt
-import os
 
 app = Flask(__name__)
 moment = Moment(app)

@@ -1,7 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, render_template
 from datetime import datetime
-from website.test_data.test_posts import fake_posts # testing
-from website.db import get_collection
+from website.database.db import get_collection
 
 posts = Blueprint('posts', __name__)
 

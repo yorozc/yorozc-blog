@@ -2,7 +2,7 @@ from flask import render_template, Blueprint
 from datetime import datetime
 import pytz
 from website.test_data.test_posts import fake_posts # testing
-from website import get_collection
+from website.database.db import get_collection
 
 main = Blueprint('main', __name__)
 

@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body{
     background-color: #f0eeee;
 }
@@ -9,6 +14,7 @@ body{
 .navbar{
     padding-top: 12px;
     padding-bottom: 12px;
+    margin-bottom: 0 !important;
 }
 
 .navbar-brand{
@@ -17,6 +23,12 @@ body{
 
 .navbar-nav > li > a{
     font-size: 18px;
+}
+
+/*-----Main Content-----*/
+
+.col-md-8{
+    margin-top: 20px !important;
 }
 
 /* -----Blog posts-----*/
@@ -56,14 +68,16 @@ body{
 /*-----flash messages-----*/
 
 .flash_message{
-
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.flash_message .success{
-    
+.flash_message.success{
+    background-color: rgb(172, 252, 179);
 }
 
-.flash_message .error{
+.flash_message.error{
     
 }
 

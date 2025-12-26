@@ -14,7 +14,7 @@ body{
 .navbar{
     padding-top: 12px;
     padding-bottom: 12px;
-    margin-bottom: 0 !important;
+    margin-bottom: 0px;
 }
 
 .navbar-brand{
@@ -28,7 +28,7 @@ body{
 /*-----Main Content-----*/
 
 .col-md-8{
-    margin-top: 20px !important;
+    /* margin-top: 20px !important; */
 }
 
 /* -----Blog posts-----*/
@@ -37,8 +37,8 @@ body{
     border: 1px solid #898989;
     border-radius: 4px;
     padding: 12px 20px;
-    margin-bottom: 20px;
     background-color: white;
+    margin-top: 20px ;
 }
 
 .blog-meta-data{
@@ -63,6 +63,7 @@ body{
     border-radius: 4px;
     padding: 20px;
     background-color: white;
+    margin-top: 20px;
 }
 
 /*-----flash messages-----*/

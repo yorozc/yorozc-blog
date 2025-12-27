@@ -7,6 +7,7 @@ from website.database.db import get_blog_collection
 
 main = Blueprint('main', __name__)
 
+
 @main.route("/")
 @main.route("/home")
 def index():

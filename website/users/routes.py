@@ -7,11 +7,21 @@ from website.models.user import User
 
 users = Blueprint('users', __name__)
 
+# TODO: Add better error handling
+
 @users.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        email = request.form["email"]
-        password = request.form["password"]
+        try:
+            email = request.form["email"]
+            password = request.form["password"]
+            remember = False # used for "remember me" chckbox
+            if request.form["password"]:
+                remember = True
+
+        except Exception as e:
+            print(f"Error: {e}")
+
         users = get_users_collection()
 
         doc = users.find_one({"email": email})
@@ -20,7 +30,7 @@ def login():
 
             if check_password_hash(doc["password"], password):
                 user = User(doc)
-                login_user(user, remember=True)
+                login_user(user, remember=remember) # true or false
                 flash(f"User {user.username} Found. Logging in now!", category="success")
                 return redirect(url_for("main.index"))
             
@@ -60,7 +70,6 @@ def register():
         }
 
         # check if user exists and stop duplicates
-
         doc = user_coll.find_one({"email": email})
 
         if doc:
@@ -68,7 +77,7 @@ def register():
             return redirect(url_for("users.login"))
         
         else:
-        # success case (need login stuff)
+        # success case 
             try:
                 user_coll.insert_one(user) # adds user to db
                 doc = user_coll.find_one({"email": email}) # finds recently made user to make into User obj

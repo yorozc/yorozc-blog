@@ -12,10 +12,7 @@ main = Blueprint('main', __name__)
 def index():
     coll = get_blog_collection()
 
-    if current_user.is_authenticated:
-        return render_template("index.html", posts=coll.find({}))
-    else:
-        return render_template("index.html", posts=coll.find({}))
+    return render_template("index.html", posts=coll.find({}))
     
 @main.route("/about")
 def about():

@@ -28,6 +28,10 @@ class User(UserMixin):
         @property
         def email(self):
             return self.doc.get("email")
+        
+        @property
+        def username(self):
+            return self.doc.get("username")
 
         def get_id(self) -> str:
             return self.id

@@ -1,9 +1,11 @@
 from flask import (Blueprint, request, redirect, url_for, render_template,
                    flash)
 from flask_login import login_user, logout_user, login_required ,current_user
+from flask_bcrypt import bcrypt
 from website import bcrypt
 from website.database.db import get_users_collection
 from website.models.user import User
+
 
 
 users = Blueprint('users', __name__)
@@ -13,8 +15,20 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
+        users = get_users_collection()
 
-    
+        doc = users.find_one({"email": email})
+
+        if doc : # user found
+            if bcrypt.check_password_hash(doc["password"], password):
+                user = User(doc)
+                login_user(user, remember=True)
+                flash(f"User {user.username} Found. Logging in now!", category="success")
+                return(redirect(url_for("main.index")))
+        else:
+            flash("User not found!", category="Error")
+            return redirect(url_for("users.login"))
+        
     else:
         return render_template("login.html")
 

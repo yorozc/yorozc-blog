@@ -1,6 +1,6 @@
 from flask import (Blueprint, request, redirect, url_for, render_template,
                    flash)
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, login_required ,current_user
 from website import bcrypt
 from website.database.db import get_users_collection
 from website.models.user import User
@@ -17,6 +17,13 @@ def login():
     
     else:
         return render_template("login.html")
+
+@login_required
+@users.route("/logout")
+def logout():
+    logout_user()
+    flash("Successfully logged out!", category="success")
+    return redirect(url_for("main.index"))
     
 @users.route("/register", methods=["POST", "GET"])
 def register():

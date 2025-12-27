@@ -1,7 +1,9 @@
 from flask import (Blueprint, request, redirect, url_for, render_template,
                    flash)
+from flask_login import login_user, logout_user, current_user
 from website import bcrypt
 from website.database.db import get_users_collection
+from website.models.user import User
 
 
 users = Blueprint('users', __name__)
@@ -22,26 +24,37 @@ def register():
         username = request.form["username"]
         email = request.form["email"]
         password = request.form["password"]
-
-        #TODO: check if user exists and stop duplicates
-
-        #TODO: check for same username and stop duplicates
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        user_coll = get_users_collection() 
 
         #TODO: validate email and password via regex
 
         user = {
             "username": username, 
             "email": email, 
-            "password": password
+            "password": hashed_password
         }
 
-        user_coll = get_users_collection()
+        # check if user exists and stop duplicates
 
+        doc = user_coll.find_one({"email": email})
+
+        if doc:
+            flash("Email already exists, login instead", category="error")
+            return redirect(url_for("auth.login"))
+        
+        else:
         # success case (need login stuff)
-        user_coll.insert_one(user)
-        flash(message=f"User {username} added", category="success")
-
-        return redirect(url_for("main.index"))
-
+            try:
+                user_coll.insert_one(user) # adds user to db
+                doc = user_coll.find_one({"email": email}) # finds recently made user to make into User obj
+                flash(message=f"User {username} created!", category="success")
+                user = User(doc) 
+                login_user(user, remember=True)
+                return redirect(url_for("main.index"))
+            
+            except Exception as e:
+                return f"ERROR:{e}"
+        
     else:
         return render_template("register.html")

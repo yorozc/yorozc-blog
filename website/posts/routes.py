@@ -8,7 +8,6 @@ posts = Blueprint('posts', __name__)
 # make a page to add a blog post
 
 @login_required
-
 @posts.route("/add_blog", methods=['POST', 'GET'])
 def add_blog():
     if request.method == "POST":
@@ -32,6 +31,7 @@ def add_blog():
 
         return render_template("add_blog.html")
     
+@login_required
 @posts.route("/delete_blog", methods=['POST'])
 def delete():
     pass

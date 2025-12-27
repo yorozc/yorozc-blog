@@ -1,6 +1,6 @@
 from flask import (Blueprint, request, redirect, url_for, render_template,
                    flash)
-from flask_login import login_user, logout_user, login_required ,current_user
+from flask_login import login_user, logout_user, login_required, current_user
 from flask_bcrypt import bcrypt
 from website import bcrypt
 from website.database.db import get_users_collection
@@ -44,8 +44,7 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         email = request.form["email"]
-        password = request.form["password"]
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(request.form["password"]).decode('utf-8')
         user_coll = get_users_collection() 
 
         #TODO: validate email and password via regex

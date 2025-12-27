@@ -20,3 +20,5 @@ def about():
     cur_time = my_tz.strftime("%I:%M %p")
     return render_template("about.html", cur_time=cur_time)
 
+# TODO: Implement error pages 
+

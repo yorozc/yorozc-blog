@@ -7,6 +7,8 @@ from website.models.user import User
 from website.database.db import get_users_collection
 import os
 
+# TODO: Setup Flask-Mail
+
 def create_app():
     app = Flask(__name__)
     moment = Moment(app)

@@ -1,11 +1,9 @@
 from flask import (Blueprint, request, redirect, url_for, render_template,
                    flash)
 from flask_login import login_user, logout_user, login_required, current_user
-from flask_bcrypt import bcrypt
+from flask_bcrypt import Bcrypt
 from website.database.db import get_users_collection
 from website.models.user import User
-
-
 
 users = Blueprint('users', __name__)
 
@@ -19,7 +17,7 @@ def login():
         doc = users.find_one({"email": email})
 
         if doc : # user found
-            if bcrypt.check_password_hash(doc["password"], password):
+            if Bcrypt.check_password_hash(doc["password"], password):
                 user = User(doc)
                 login_user(user, remember=True)
                 flash(f"User {user.username} Found. Logging in now!", category="success")
@@ -43,7 +41,7 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         email = request.form["email"]
-        hashed_password = bcrypt.generate_password_hash(request.form["password"]).decode('utf-8')
+        hashed_password = Bcrypt.generate_password_hash(request.form["password"]).decode('utf-8')
         user_coll = get_users_collection() 
 
         #TODO: validate email and password via regex

@@ -53,7 +53,8 @@ def register():
         user = {
             "username": username, 
             "email": email, 
-            "password": hashed_password
+            "password": hashed_password,
+            "role": "user"
         }
 
         # check if user exists and stop duplicates

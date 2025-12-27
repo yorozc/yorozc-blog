@@ -19,7 +19,7 @@ class User(UserMixin):
         
         @property
         def is_admin(self):
-            return self.doc.get("role") == "admin"
+            return self.role == "admin"
         
         @property
         def role(self):

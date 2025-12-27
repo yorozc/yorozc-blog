@@ -1,7 +1,7 @@
 from flask import (Blueprint, request, redirect, url_for, render_template,
                    flash)
 from flask_login import login_user, logout_user, login_required, current_user
-from flask_bcrypt import Bcrypt
+from werkzeug.security import check_password_hash, generate_password_hash
 from website.database.db import get_users_collection
 from website.models.user import User
 
@@ -16,14 +16,20 @@ def login():
 
         doc = users.find_one({"email": email})
 
-        if doc : # user found
-            if Bcrypt.check_password_hash(doc["password"], password):
+        if doc and check_password_hash(doc["password"], password): # user found
+
+            if check_password_hash(doc["password"], password):
                 user = User(doc)
                 login_user(user, remember=True)
                 flash(f"User {user.username} Found. Logging in now!", category="success")
-                return(redirect(url_for("main.index")))
+                return redirect(url_for("main.index"))
+            
+            else: #wrong password
+                flash("Wrong password!", category="error")
+                return redirect(url_for("users.login"))
+
         else:
-            flash("User not found!", category="Error")
+            flash("User not found!", category="error")
             return redirect(url_for("users.login"))
         
     else:
@@ -41,7 +47,7 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         email = request.form["email"]
-        hashed_password = Bcrypt.generate_password_hash(request.form["password"]).decode('utf-8')
+        hashed_password = generate_password_hash(request.form["password"], method="scrypt", salt_length=16)
         user_coll = get_users_collection() 
 
         #TODO: validate email and password via regex
@@ -59,7 +65,7 @@ def register():
 
         if doc:
             flash("Email already exists, login instead", category="error")
-            return redirect(url_for("auth.login"))
+            return redirect(url_for("users.login"))
         
         else:
         # success case (need login stuff)

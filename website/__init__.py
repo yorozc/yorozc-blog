@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_moment import Moment
-from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from bson import ObjectId
 from website.models.user import User
@@ -12,7 +11,6 @@ import os
 def create_app():
     app = Flask(__name__)
     moment = Moment(app)
-    bcrypt = Bcrypt(app)
 
     app.secret_key = os.getenv("SECRET_KEY")
 

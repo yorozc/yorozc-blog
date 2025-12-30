@@ -8,7 +8,7 @@ posts = Blueprint('posts', __name__)
 # make a page to add a blog post
 
 @login_required
-@posts.route("/add_blog", methods=['POST', 'GET'])
+@posts.route("/add_blog", methods=["POST", "GET"])
 def add_blog():
     if request.method == "POST":
         author = request.form["author"]
@@ -25,13 +25,18 @@ def add_blog():
 
         coll.insert_one(post)
 
-        return redirect(url_for('main.index'))
+        return redirect(url_for("main.index"))
 
     elif request.method == "GET":
 
         return render_template("add_blog.html")
     
 @login_required
-@posts.route("/delete_blog", methods=['POST'])
+@posts.route("/delete_blog", methods=["POST"])
 def delete():
+    pass
+
+@login_required
+@posts.route("/update_blog", methods=["POST"])
+def update():
     pass

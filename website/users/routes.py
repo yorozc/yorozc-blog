@@ -70,10 +70,20 @@ def register():
         }
 
         # check if user exists and stop duplicates
-        doc = user_coll.find_one({"email": email})
+        doc = user_coll.find_one({
+            "$or": [
+                {"email": email}, 
+                {"username": username}
+                ]
+            })
 
         if doc:
-            flash("Email already exists, login instead", category="error")
+            if doc["username"] == username:
+                flash("Username already taken!", category="error")
+        
+            else:
+                flash("Email already exists, login instead", category="error")
+                
             return redirect(url_for("users.login"))
         
         else:

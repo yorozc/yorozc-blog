@@ -5,8 +5,6 @@ from website.database.db import get_blog_collection
 
 posts = Blueprint('posts', __name__)
 
-# make a page to add a blog post
-
 @login_required
 @posts.route("/add_blog", methods=["POST", "GET"])
 def add_blog():

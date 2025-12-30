@@ -69,7 +69,7 @@ def register():
             "role": "user"
         }
 
-        # check if user exists and stop duplicates
+        # check if user exists via email or username and stop duplicates
         doc = user_coll.find_one({
             "$or": [
                 {"email": email}, 

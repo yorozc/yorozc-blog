@@ -51,7 +51,6 @@ def delete_post(post_id):
 def update_post(post_id):
     coll = get_blog_collection()
     if request.method == "POST":
-        
         # update data
         upd_title = request.form["title"]
         upd_content = request.form["content"]
@@ -67,7 +66,6 @@ def update_post(post_id):
         return redirect(url_for("main.index"))
     
     elif request.method == "GET":
-
         post = coll.find_one({"blog_id": post_id}) #returns dict
         title = post.get("title")
         content = post.get("content")

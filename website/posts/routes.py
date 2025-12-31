@@ -47,6 +47,29 @@ def delete_post(post_id):
         return redirect(url_for("main.index"))
 
 @login_required
-@posts.route("/update_post", methods=["GET", "POST"])
-def update():
-    pass
+@posts.route("/post/<post_id>/update_post", methods=["POST", "GET"])
+def update_post(post_id):
+    coll = get_blog_collection()
+    if request.method == "POST":
+        
+        # update data
+        upd_title = request.form["title"]
+        upd_content = request.form["content"]
+        coll.update_one({"blog_id": post_id}, 
+                        {"$set": {"title": upd_title,
+                                "content": upd_content}}
+                            )
+        
+        # if post.modified_count == 0:
+        #     return abort(500)
+        # else:
+
+        return redirect(url_for("main.index"))
+    
+    elif request.method == "GET":
+
+        post = coll.find_one({"blog_id": post_id}) #returns dict
+        title = post.get("title")
+        content = post.get("content")
+
+        return render_template("update_post.html", post_id=post_id, title=title, content=content)

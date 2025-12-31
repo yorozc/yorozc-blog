@@ -8,6 +8,9 @@
     <div class="blog-meta-data text-muted">
         <p class="author"> {{ post.author }}</p>
         <p class="date_posted"> {{ post.date_posted }}</p>
+        <form action="{{ url_for('posts.update_post', post_id=post.blog_id) }}" method="POST">
+            <button type="submit" class="update-btn">Update</button> 
+        </form>
         <form action="{{ url_for('posts.delete_post', post_id=post.post_id) }}" method="POST">
             <button type="submit" class="del-btn">Delete</button> 
         </form>

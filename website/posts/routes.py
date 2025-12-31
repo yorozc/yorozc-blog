@@ -38,18 +38,13 @@ def blog(blog_id):
     return render_template('blog.html', post=coll.find_one({"blog_id": blog_id}))
     
 @login_required
-@posts.route("/delete_blog", methods=["POST"])
+@posts.route("/blog/<blog_id>/delete_blog", methods=["POST"])
 def delete_blog(blog_id):
     if request.method == "POST":
-        print(blog_id)
-        # # look for post via blog id
-        # post = get_blog_collection().find({"blog_id": blog_id})
-        # if post["author"] != current_user:
-        #     abort(403)
+        # look for post via blog id and delete only one
+        get_blog_collection().find_one_and_delete({"blog_id": blog_id})
         
-
-
-    return redirect(url_for("main.index"))
+        return redirect(url_for("main.index"))
 
 @login_required
 @posts.route("/update_blog", methods=["POST"])

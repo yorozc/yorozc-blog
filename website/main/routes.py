@@ -2,7 +2,6 @@ from flask import render_template, Blueprint
 from flask_login import current_user
 from datetime import datetime
 import pytz
-from website.test_data.test_posts import fake_posts # testing
 from website.database.db import get_blog_collection
 
 main = Blueprint('main', __name__)

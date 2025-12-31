@@ -10,12 +10,12 @@
         <div class="blog-meta-data text-muted">
             <p class="author"> {{ post.author }}</p>
             <p class="date_posted"> {{ post.date_posted }}</p>
-            <form action="{{ url_for('posts.delete_blog', blog_id=post.blog_id) }}" method="POST">
+            <form action="{{ url_for('posts.delete_post', post_id=post.blog_id) }}" method="POST">
                 <button type="submit" class="del-btn">Delete</button> 
             </form>
         </div>
         <div class="article-content">
-            <h1 class="blog-title"><a href="{{ url_for ('posts.blog', blog_id=post.blog_id) }}">{{ post.title }}</a></h1>
+            <h1 class="blog-title"><a href="{{ url_for ('posts.post', post_id=post.blog_id) }}">{{ post.title }}</a></h1>
             <p class="blog-content">{{ post.content }}</p>
         </div>
     </div>

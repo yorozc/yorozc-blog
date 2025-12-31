@@ -6,9 +6,14 @@ from website.database.db import get_blog_collection
 
 posts = Blueprint('posts', __name__)
 
+@posts.route("/post/<post_id>", methods=["GET"])
+def post(post_id):
+    coll = get_blog_collection()
+    return render_template('post.html', post=coll.find_one({"blog_id": post_id}))
+
 @login_required
-@posts.route("/add_blog", methods=["POST", "GET"])
-def add_blog():
+@posts.route("/add_post", methods=["POST", "GET"])
+def add_post():
     if request.method == "POST":
         author = request.form["author"]
         title = request.form["title"]
@@ -30,23 +35,18 @@ def add_blog():
 
     elif request.method == "GET":
 
-        return render_template("add_blog.html")
-    
-@posts.route("/blog/<blog_id>", methods=["GET"])
-def blog(blog_id):
-    coll = get_blog_collection()
-    return render_template('blog.html', post=coll.find_one({"blog_id": blog_id}))
+        return render_template("add_post.html")
     
 @login_required
-@posts.route("/blog/<blog_id>/delete_blog", methods=["POST"])
-def delete_blog(blog_id):
+@posts.route("/post/<post_id>/delete_post", methods=["POST"])
+def delete_post(post_id):
     if request.method == "POST":
         # look for post via blog id and delete only one
-        get_blog_collection().find_one_and_delete({"blog_id": blog_id})
-        
+        get_blog_collection().find_one_and_delete({"blog_id": post_id})
+
         return redirect(url_for("main.index"))
 
 @login_required
-@posts.route("/update_blog", methods=["POST"])
+@posts.route("/update_post", methods=["GET", "POST"])
 def update():
     pass

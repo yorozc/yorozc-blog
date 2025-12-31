@@ -32,15 +32,10 @@ def add_blog():
 
         return render_template("add_blog.html")
     
-@login_required
 @posts.route("/blog/<blog_id>", methods=["GET"])
 def blog(blog_id):
     coll = get_blog_collection()
-    blog = coll.find({"blog_id": blog_id})
-    if blog:
-        return render_template('blog.html', post=blog)
-    else:
-        abort(404)
+    return render_template('blog.html', post=coll.find_one({"blog_id": blog_id}))
     
 @login_required
 @posts.route("/delete_blog", methods=["POST"])

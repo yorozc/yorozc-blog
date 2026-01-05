@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from pymongo.errors import ConfigurationError
+import certifi
 import os
 
 try:
@@ -12,6 +13,8 @@ try:
     def get_client() -> MongoClient:
         return MongoClient(
             _uri(),
+            tls=True,
+            tlsCAFile=certifi.where()
         )
 
     try:
